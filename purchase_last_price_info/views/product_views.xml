@@ -18,13 +18,16 @@
                     <field
                         name="last_purchase_currency_id"
                         groups="base.group_multi_currency"
-                        attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"
                     />
+                    <!--attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"-->
+                
                     <field
                         name="last_purchase_price_currency"
                         groups="base.group_multi_currency"
-                        attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"
                     />
+                    <!--attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"-->
+
+                    <field name="last_purchase_price_net" />
                 </group>
             </field>
         </field>
@@ -47,13 +50,16 @@
                     <field
                         name="last_purchase_currency_id"
                         groups="base.group_multi_currency"
-                        attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"
+                       
                     />
+                    <!-- attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"-->
                     <field
                         name="last_purchase_price_currency"
                         groups="base.group_multi_currency"
-                        attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"
+                        
                     />
+                    <!--attrs="{'invisible':[('show_last_purchase_price_currency', '=', False)]}"-->
+                    <field name="last_purchase_price_net" />
                 </group>
             </field>
         </field>

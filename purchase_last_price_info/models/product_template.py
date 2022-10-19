@@ -43,6 +43,11 @@ class ProductTemplate(models.Model):
         related="product_variant_ids.last_purchase_price_currency",
         digits=0,
     )
+    #CAMP NOU AFEGIT
+    last_purchase_price_net = fields.Float(
+        compute="_compute_last_purchase_line_id_info", 
+        string="Último coste de compra(€)"
+    )
 
     @api.depends("last_purchase_line_ids")
     def _compute_last_purchase_line_id(self):
@@ -56,3 +61,7 @@ class ProductTemplate(models.Model):
             item.last_purchase_date = item.last_purchase_line_id.date_order
             item.last_purchase_supplier_id = item.last_purchase_line_id.partner_id
             item.last_purchase_currency_id = item.last_purchase_line_id.currency_id
+            if item.last_purchase_line_id.product_qty != 0:
+                valor = ((item.last_purchase_line_id.price_subtotal / item.last_purchase_line_id.product_qty) / item.last_purchase_line_id.currency_id.rate)
+                item.last_purchase_price_net = str(round(valor,3)) + " " + str(item.last_purchase_line_id.company_id.currency_id.display_name)
+    
