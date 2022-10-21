@@ -35,3 +35,15 @@ class ProductPriceList(models.Model):
         res = super(ProductPriceList, self)._search(args, offset, limit, order,
                                                     count=count, access_rights_uid=access_rights_uid)
         return res
+
+class PricelistItem(models.Model):
+    _inherit = 'product.pricelist.item'
+    
+    @api.model
+    def _search(self, args, offset=0, limit=None, order=None, count=False, access_rights_uid=None):
+        params = self.env['ir.config_parameter'].sudo()
+        pricelist_restricted = params.get_param('restrict_pricelist_user.is_restricted')
+        if pricelist_restricted and self.env.user.pricelist_ids.ids:
+            args.append(('pricelist_id', 'in', self.env.user.pricelist_ids.ids))
+        res = super(PricelistItem, self)._search(args, offset, limit, order,count=count, access_rights_uid=access_rights_uid)
+        return res
