@@ -68,7 +68,7 @@ class PurchaseOrderLine(models.Model):
     blanket_order_line = fields.Many2one(
         "purchase.blanket.order.line", "Blanket Order Line", copy=False
     )
-
+        
     def _get_assigned_bo_line(self, bo_lines):
         # We get the blanket order line with enough quantity and closest
         # scheduled date
@@ -125,7 +125,7 @@ class PurchaseOrderLine(models.Model):
         if self.product_id:
             return self.get_assigned_bo_line()
         return res
-
+    
     @api.onchange("product_qty", "product_uom")
     def _onchange_quantity(self):
         res = super()._onchange_quantity()
@@ -180,3 +180,5 @@ class PurchaseOrderLine(models.Model):
                         "of the purchase order."
                     )
                 )
+
+    
